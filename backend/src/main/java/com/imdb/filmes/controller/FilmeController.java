@@ -35,15 +35,14 @@ public class FilmeController {
         return ResponseEntity.ok(filmesService.save(filme));
     }
 
-    @Operation(summary = "Listagem de filmes paginados e ordenados",
+    @Operation(summary = "Listagem de todos os filmes paginados e ordenados",
             description = "Para usar paginação e ordenagem utilize: ?page='number'&sort='field' na url",
             tags = {"filmes"})
     @GetMapping
     public ResponseEntity<Page<Filme>> listarTodos(@PageableDefault(sort = "name",
             direction = Sort.Direction.ASC,
             page = 0,
-            size = 5)
-                                                            Pageable pageable){
+            size = 5) Pageable pageable){
         return ResponseEntity.ok(filmesService.listAll(pageable));
     }
 
@@ -56,7 +55,7 @@ public class FilmeController {
         return ResponseEntity.ok(filmesService.findById(id));
     }
 
-    @Operation(summary = "Busca filme por diretor, nome, gênero e/ou atores",
+    @Operation(summary = "Listagem filme por diretor, nome, gênero e/ou atores",
             description = "O paramentro de busca deve ser passado na url",
             tags = {"filmes"})
     @GetMapping(path = "/args")
@@ -64,21 +63,30 @@ public class FilmeController {
         return ResponseEntity.ok(filmesService.findByName(name));
     }
 
-    @Operation(summary = "Exclusão lógica",
-            description = "O ID a ser excluido deve ser passado na url",
-            tags = {"filmes"})
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable long id) {
-        filmesService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @Operation(summary = "Exclusão lógica",
+//            description = "O ID a ser excluido deve ser passado na url",
+//            tags = {"filmes"})
+//    @DeleteMapping(path = "/{id}")
+//    public ResponseEntity<Void> delete(@PathVariable long id) {
+//        filmesService.delete(id);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
-    @Operation(summary = "Editar filme por ID",
-            description = "O ID a ser editado deve ser passado na url",
-            tags = {"filmes"})
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody Filme filme) {
-        filmesService.update(filme);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @Operation(summary = "Editar filme por ID",
+//            description = "O ID a ser editado deve ser passado na url",
+//            tags = {"filmes"})
+//    @PutMapping(path = "/{id}")
+//    public ResponseEntity<Void> update(@RequestBody Filme filme) {
+//        filmesService.update(filme);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
+//
+//    @Operation(summary = "Desativa/Ativa filme",
+//            description = "O ID a ser excluido deve ser passado na url",
+//            tags = {"filmes"})
+//    @PutMapping(path = "/deActivate/{id}")
+//    public ResponseEntity<Void> deActivate(@RequestBody Filme filme) {
+//        filmesService.deActivate(filme);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 }

@@ -24,4 +24,6 @@ public class Usuario {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    private Boolean active;
 }

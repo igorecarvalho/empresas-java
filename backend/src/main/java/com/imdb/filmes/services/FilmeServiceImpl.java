@@ -4,6 +4,7 @@ import com.imdb.filmes.model.Filme;
 import com.imdb.filmes.repository.FilmeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class FilmeServiceImpl {
         this.filmeRepository = filmeRepository;
     }
 
+//    @Query(value = "SELECT DISTINCT u.authorities, u.login from filmes.usuario u WHERE u.active = FALSE and u.authorities like '%ADMIN%'")
     public Page<Filme> listAll(Pageable pageable) {
         return filmeRepository.findAll(pageable);
     }
@@ -41,5 +43,9 @@ public class FilmeServiceImpl {
 
     public void update(Filme filme) {
         filmeRepository.save(filme);
+    }
+
+    public void deActivate(Filme filme) {
+        filme.setActive(!filme.getActive());
     }
 }

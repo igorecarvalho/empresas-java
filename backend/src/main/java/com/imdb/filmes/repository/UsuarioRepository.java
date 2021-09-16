@@ -8,4 +8,7 @@ import java.util.Optional;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     public Optional<Usuario> findByLogin(String login);
+
+    @Override
+    Optional<Usuario> findById(Integer integer);
 }
