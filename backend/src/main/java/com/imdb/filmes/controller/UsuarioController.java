@@ -44,22 +44,22 @@ public class UsuarioController {
     }
 
 
-    @Operation(summary = "Validação de senha de usuário",
-            description = "Exibe uma listagem de todos os usuários",
-            tags = {"users"})
-    @GetMapping("/validarSenha")
-    public ResponseEntity<Boolean> validarSenha(@RequestParam String login,
-                                                @RequestParam String password) {
-
-        Optional<Usuario> optUsuario = repository.findByLogin(login);
-        if (optUsuario.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
-        }
-
-        Usuario usuario = optUsuario.get();
-        boolean valid = encoder.matches(password, usuario.getPassword());
-
-        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
-        return ResponseEntity.status(status).body(valid);
-    }
+//    @Operation(summary = "Validação de senha de usuário",
+//            description = "Exibe uma listagem de todos os usuários",
+//            tags = {"users"})
+//    @GetMapping("/validarSenha")
+//    public ResponseEntity<Boolean> validarSenha(@RequestParam String login,
+//                                                @RequestParam String password) {
+//
+//        Optional<Usuario> optUsuario = repository.findByLogin(login);
+//        if (optUsuario.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+//        }
+//
+//        Usuario usuario = optUsuario.get();
+//        boolean valid = encoder.matches(password, usuario.getPassword());
+//
+//        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
+//        return ResponseEntity.status(status).body(valid);
+//    }
 }
