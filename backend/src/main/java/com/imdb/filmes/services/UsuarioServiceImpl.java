@@ -1,13 +1,11 @@
 package com.imdb.filmes.services;
 
 import com.imdb.filmes.data.UsuarioData;
-import com.imdb.filmes.model.Filme;
 import com.imdb.filmes.model.Usuario;
 import com.imdb.filmes.repository.UsuarioRepository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -39,6 +37,10 @@ public class UsuarioServiceImpl implements UserDetailsService {
         return repository.findAll(pageable);
     }
 
+    public Page<Usuario> findActiveUsers(Pageable pageable) {
+        return repository.findActiveUsers(pageable);
+    }
+
     public Optional<Usuario> findById(Integer id) {
         return repository.findById(id);
     }
@@ -51,8 +53,10 @@ public class UsuarioServiceImpl implements UserDetailsService {
         repository.save(usuario);
     }
 
-    public void deActivate(Usuario usuario) {
+    public void deActivate(Integer id) {
+        Usuario usuario = repository.findUsuarioById(id);
         usuario.setActive(!usuario.getActive());
+        repository.save(usuario);
     }
 
 }

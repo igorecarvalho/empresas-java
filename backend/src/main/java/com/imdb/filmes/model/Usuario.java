@@ -6,11 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="Usuario")
+@Entity(name="USUARIOS")
 public class Usuario {
 
     @Id
@@ -26,4 +27,7 @@ public class Usuario {
     private String password;
 
     private Boolean active;
+
+    @OneToMany
+    private List<Voto> votos;
 }

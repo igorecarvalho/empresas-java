@@ -46,7 +46,7 @@ public class UsuarioController {
             direction = Sort.Direction.ASC,
             page = 0,
             size = 5) Pageable pageable){
-        return ResponseEntity.ok(repository.listAll(pageable));
+        return ResponseEntity.ok(repository.findActiveUsers(pageable));
     }
 
     @Operation(summary = "Cadastrar um novo usuário",
@@ -71,8 +71,8 @@ public class UsuarioController {
             description = "O ID a ser desativado deve ser passado na url",
             tags = {"user"})
     @PutMapping(path = "/deActivate/{id}")
-    public ResponseEntity<Void> deActivate(@RequestBody Usuario usuario) {
-        repository.deActivate(usuario);
+    public ResponseEntity<Void> deActivate(@PathVariable Integer id) {
+        repository.deActivate(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

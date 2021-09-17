@@ -8,25 +8,21 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="FILMES")
-public class Filme {
+@AllArgsConstructor
+@Entity(name="VOTOS")
+public class Voto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
-    private String name;
+    private Integer valor;
 
-    private String diretor;
+    @ManyToMany
+    private List<Usuario> usuario;
 
-    private String genero;
+    @OneToOne
+    private Filme filme;
 
-    private String atores;
-
-    private Boolean active;
-
-    @OneToMany
-    private List<Voto> votos;
 }
