@@ -2,9 +2,9 @@ package com.imdb.filmes.services;
 
 import com.imdb.filmes.model.Filme;
 import com.imdb.filmes.repository.FilmeRepository;
+import com.imdb.filmes.repository.VotoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,22 +14,30 @@ import java.util.List;
 public class FilmeServiceImpl {
 
     private final FilmeRepository filmeRepository;
+    private final VotoRepository votoRepository;
 
-    public FilmeServiceImpl(FilmeRepository filmeRepository) {
+    public FilmeServiceImpl(FilmeRepository filmeRepository, VotoRepository votoRepository) {
         this.filmeRepository = filmeRepository;
+        this.votoRepository = votoRepository;
     }
 
-//    @Query(value = "SELECT DISTINCT u.authorities, u.login from filmes.usuario u WHERE u.active = FALSE and u.authorities like '%ADMIN%'")
-    public Page<Filme> listAll(Pageable pageable) {
-        return filmeRepository.findAll(pageable);
+    public List<Filme> listAll() {
+        return filmeRepository.findAllDesc();
     }
 
     public List<Filme> findByName(String name) {
         return filmeRepository.findByName(name);
     }
 
-    public Filme findById(long id) {
-        return filmeRepository.findById(id).get();
+//    public Filme findById(Long id) {
+//        return filmeRepository.findById(id).get();
+//    }
+
+    public Filme findFilme(Long id) {
+        Filme filme = filmeRepository.findById(id).get();
+        Double media = votoRepository.mediaFilme(id);
+        filme.setMedia(media);
+        return filme;
     }
 
     @Transactional

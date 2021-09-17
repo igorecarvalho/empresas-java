@@ -10,7 +10,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="FILMES")
+@Entity
+@Table(name="filmes")
 public class Filme {
 
     @Id
@@ -25,7 +26,9 @@ public class Filme {
 
     private String atores;
 
-    @ManyToMany(mappedBy = "filmes")
-    private List<Usuario> usuarios;
+    @Transient
+    private Double media;
 
+    @OneToMany(mappedBy = "filme")
+    private List<Voto> votos;
 }

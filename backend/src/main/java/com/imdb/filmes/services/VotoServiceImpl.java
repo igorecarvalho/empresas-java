@@ -1,7 +1,6 @@
 package com.imdb.filmes.services;
 
 import com.imdb.filmes.dto.VotoDTO;
-import com.imdb.filmes.exceptions.CustomException;
 import com.imdb.filmes.model.Filme;
 import com.imdb.filmes.model.Usuario;
 import com.imdb.filmes.model.Voto;
@@ -27,8 +26,8 @@ public class VotoServiceImpl {
     @Transactional
     public Voto votar(VotoDTO voto){
 
-        Usuario usuario = usuarioRepository.findById(voto.getIdUsuario()).orElseThrow(()-> new CustomException("Usuario não encontrado! Id: " + voto.getIdUsuario() + ", Tipo: " + Usuario.class.getName()));
-        Filme filme = filmeRepository.findById(voto.getIdFilme()).orElseThrow(()-> new CustomException("Filme não encontrado! Id: " + voto.getIdFilme() + ", Tipo: " + Filme.class.getName()));
+        Usuario usuario = usuarioRepository.findById(voto.getIdUsuario()).get();
+        Filme filme = filmeRepository.findById(voto.getIdFilme()).get();
 
         Voto novoVoto = new Voto();
         novoVoto.setVoto(voto.getVoto());

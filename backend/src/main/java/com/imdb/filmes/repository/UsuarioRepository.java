@@ -17,6 +17,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     Usuario findUsuarioById(Integer id);
 
-    @Query("SELECT u from USUARIOS u WHERE u.authorities not LIKE '%ADMIN%' and u.active = TRUE")
+    @Query("SELECT u from Usuario u WHERE u.authorities not LIKE '%ADMIN%' and u.active = TRUE")
     public Page<Usuario> findActiveUsers(Pageable pageable);
 }

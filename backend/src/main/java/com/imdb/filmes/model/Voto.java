@@ -1,5 +1,6 @@
 package com.imdb.filmes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import javax.validation.constraints.Min;
 @Entity
 @Getter
 @Setter
-@Table(name = "usuario_filme")
+@Table(name = "usuarios_filmes")
 public class Voto {
 
     @Id
@@ -23,10 +24,12 @@ public class Voto {
     private Integer voto;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     Usuario usuario;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "id_filme", referencedColumnName = "id")
     Filme filme;
 }

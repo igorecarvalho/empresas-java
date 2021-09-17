@@ -39,11 +39,8 @@ public class FilmeController {
             description = "Para usar paginação e ordenagem utilize: ?page='number'&sort='field' na url",
             tags = {"filmes"})
     @GetMapping
-    public ResponseEntity<Page<Filme>> listarTodos(@PageableDefault(sort = "name",
-            direction = Sort.Direction.ASC,
-            page = 0,
-            size = 5) Pageable pageable){
-        return ResponseEntity.ok(filmesService.listAll(pageable));
+    public ResponseEntity<List<Filme>> listarTodos(){
+        return ResponseEntity.ok(filmesService.listAll());
     }
 
     @Operation(summary = "Lista um filme pelo ID",
@@ -52,7 +49,7 @@ public class FilmeController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<Filme> findById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
         log.info("User logged in {}", userDetails);
-        return ResponseEntity.ok(filmesService.findById(id));
+        return ResponseEntity.ok(filmesService.findFilme(id));
     }
 
     @Operation(summary = "Listagem filme por diretor, nome, gênero e/ou atores",
