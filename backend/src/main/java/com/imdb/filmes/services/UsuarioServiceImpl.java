@@ -1,9 +1,6 @@
 package com.imdb.filmes.services;
 
 import com.imdb.filmes.data.UsuarioData;
-import com.imdb.filmes.dto.VotoDTO;
-import com.imdb.filmes.exceptions.CustomException;
-import com.imdb.filmes.model.Filme;
 import com.imdb.filmes.model.Usuario;
 import com.imdb.filmes.repository.FilmeRepository;
 import com.imdb.filmes.repository.UsuarioRepository;

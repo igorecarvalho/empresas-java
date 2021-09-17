@@ -53,11 +53,14 @@ public class FilmeController {
     }
 
     @Operation(summary = "Listagem filme por diretor, nome, gênero e/ou atores",
-            description = "O paramentro de busca deve ser passado na url",
+            description = "Os paramentro de busca deve ser passado na url",
             tags = {"filmes"})
-    @GetMapping(path = "/args")
-    public ResponseEntity<List<Filme>> findByName(@RequestParam(value = "name") String name) {
-        return ResponseEntity.ok(filmesService.findByName(name));
+    @GetMapping(path = "/filters")
+    public ResponseEntity<List<Filme>> findByName(@RequestParam(value = "name") String name,
+                                                  @RequestParam(value = "diretor") String diretor,
+                                                  @RequestParam(value = "genero") String genero,
+                                                  @RequestParam(value = "atores") String atores) {
+        return ResponseEntity.ok(filmesService.findByFilters(name, diretor, genero, atores));
     }
 
 //    @Operation(summary = "Excluir filme",

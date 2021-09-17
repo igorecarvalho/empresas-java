@@ -29,6 +29,10 @@ public class FilmeServiceImpl {
         return filmeRepository.findByName(name);
     }
 
+    public List<Filme> findByFilters(String name, String diretor, String genero, String atores){
+        return filmeRepository.findByFilters(name, diretor, genero, atores);
+    }
+
 //    public Filme findById(Long id) {
 //        return filmeRepository.findById(id).get();
 //    }
