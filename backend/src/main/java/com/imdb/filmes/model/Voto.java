@@ -1,28 +1,32 @@
 package com.imdb.filmes.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="VOTOS")
+@Entity
+@Getter
+@Setter
+@Table(name = "usuario_filme")
 public class Voto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private Integer valor;
+    @Min(0)
+    @Max(4)
+    private Integer voto;
 
-    @ManyToMany
-    private List<Usuario> usuario;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    Usuario usuario;
 
-    @OneToOne
-    private Filme filme;
-
+    @ManyToOne
+    @JoinColumn(name = "id_filme", referencedColumnName = "id")
+    Filme filme;
 }

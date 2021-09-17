@@ -29,7 +29,7 @@ public class FilmeServiceImpl {
     }
 
     public Filme findById(long id) {
-        return filmeRepository.findById(id);
+        return filmeRepository.findById(id).get();
     }
 
     @Transactional
@@ -37,15 +37,12 @@ public class FilmeServiceImpl {
         return filmeRepository.save(filme);
     }
 
-    public void delete(long id) {
-        filmeRepository.delete(filmeRepository.findById(id));
-    }
+//    public void delete(long id) {
+//        filmeRepository.delete(filmeRepository.findById(id).get());
+//    }
 
     public void update(Filme filme) {
         filmeRepository.save(filme);
     }
 
-    public void deActivate(Filme filme) {
-        filme.setActive(!filme.getActive());
-    }
 }

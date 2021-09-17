@@ -15,7 +15,7 @@ public class Filme {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
 
@@ -25,8 +25,7 @@ public class Filme {
 
     private String atores;
 
-    private Boolean active;
+    @ManyToMany(mappedBy = "filmes")
+    private List<Usuario> usuarios;
 
-    @OneToMany
-    private List<Voto> votos;
 }

@@ -1,5 +1,6 @@
 package com.imdb.filmes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,11 @@ public class Usuario {
 
     private Boolean active;
 
-    @OneToMany
-    private List<Voto> votos;
+    @JsonIgnore
+    @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(name="usuario_filme", joinColumns=
+            {@JoinColumn(name="id_usuario")}, inverseJoinColumns=
+            {@JoinColumn(name="id_filme")})
+    private List<Filme> filmes;
+
 }

@@ -50,7 +50,7 @@ public class FilmeController {
             description = "O ID a ser buscado deve ser passado na url",
             tags = {"filmes"})
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Filme> findById(@PathVariable long id, @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<Filme> findById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
         log.info("User logged in {}", userDetails);
         return ResponseEntity.ok(filmesService.findById(id));
     }
@@ -63,7 +63,7 @@ public class FilmeController {
         return ResponseEntity.ok(filmesService.findByName(name));
     }
 
-//    @Operation(summary = "Exclusão lógica",
+//    @Operation(summary = "Excluir filme",
 //            description = "O ID a ser excluido deve ser passado na url",
 //            tags = {"filmes"})
 //    @DeleteMapping(path = "/{id}")

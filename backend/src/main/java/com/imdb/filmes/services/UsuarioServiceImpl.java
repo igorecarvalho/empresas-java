@@ -1,7 +1,11 @@
 package com.imdb.filmes.services;
 
 import com.imdb.filmes.data.UsuarioData;
+import com.imdb.filmes.dto.VotoDTO;
+import com.imdb.filmes.exceptions.CustomException;
+import com.imdb.filmes.model.Filme;
 import com.imdb.filmes.model.Usuario;
+import com.imdb.filmes.repository.FilmeRepository;
 import com.imdb.filmes.repository.UsuarioRepository;
 
 import org.springframework.data.domain.Page;
@@ -17,9 +21,11 @@ import java.util.Optional;
 public class UsuarioServiceImpl implements UserDetailsService {
 
     private final UsuarioRepository repository;
+    private final FilmeRepository filmeRepository;
 
-    public UsuarioServiceImpl(UsuarioRepository repository) {
+    public UsuarioServiceImpl(UsuarioRepository repository, FilmeRepository filmeRepository) {
         this.repository = repository;
+        this.filmeRepository = filmeRepository;
     }
 
     @Override
