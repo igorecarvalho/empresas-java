@@ -60,10 +60,13 @@ public class JWTConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
+//                .antMatchers(HttpMethod.POST, "/filme").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.POST, "/voto").hasRole("USER")
+//                .antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                 .antMatchers("/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JWTAuthFilter(authenticationManager()))
+                .addFilter(new JWTAuthFilter(authenticationManager(), usuarioService))
                 .addFilter(new JWTValidarFilter(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

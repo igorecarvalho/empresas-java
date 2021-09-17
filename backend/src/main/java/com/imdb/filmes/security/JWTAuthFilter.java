@@ -5,10 +5,12 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imdb.filmes.data.UsuarioData;
 import com.imdb.filmes.model.Usuario;
+import com.imdb.filmes.services.UsuarioServiceImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -17,7 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -26,9 +30,11 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
     public static final String TOKEN_PASSWORD = "463408a1-54c9-4307-bb1c-6cced559f5a7";
 
     private final AuthenticationManager authenticationManager;
+    private final UsuarioServiceImpl usuarioService;
 
-    public JWTAuthFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthFilter(AuthenticationManager authenticationManager, UsuarioServiceImpl usuarioService) {
         this.authenticationManager = authenticationManager;
+        this.usuarioService = usuarioService;
     }
 
 
