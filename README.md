@@ -1,9 +1,3 @@
-# Desafio Pessoa Desenvolvedora Java
-
-## 🏗 O que fazer?
-
-- Você deve realizar um *fork* deste repositório e, ao finalizar, enviar o link do seu repositório para a nossa equipe. Lembre-se, **NÃO** é necessário criar um *Pull Request* para isso, nós iremos avaliar e retornar por e-mail o resultado do teste
-
 # 🚨 Requisitos
 
 - A API deve ser construída em Java (8 ou superior) utilizando Spring Framework (2.2 ou superior)
